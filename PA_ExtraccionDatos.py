@@ -15,6 +15,15 @@ from io import StringIO
 from datetime import datetime
 
 
+#pip install missingno
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import missingno as msno       # Para visualización de valores nulos
+import scipy.stats as stats    # Para pruebas estadísticas
+from matplotlib.patches import Patch
+
+
 
 wb.source.info()
 wb.economy.info(db=75)
@@ -108,17 +117,18 @@ BM_Data = BM_Data.drop(dropcolumns, axis=1)
 
 
 ###############################
+
 #DATOS GBIF
+
 ###############################
 
 
-############################################
 
+
+
+############################################
 # Descargar los datos y generar subset por año y país
-
 ############################################
-
-
 
 # Parámetros
 BASE_URL = "https://analytics-files.gbif.org/global/csv/"
@@ -191,8 +201,8 @@ print(dataframes["occ_country"].head())
 
 
 
-#########################3
-#JOIN
+########################
+#Unión de archivos de datos de GBIF.
 ########################
 
 # Renombrar columnas
@@ -224,10 +234,62 @@ df_merged = reduce(lambda left, right: pd.merge(left, right, on=["year", "countr
 # Mostrar una vista previa
 print(df_merged.head())
 
+#Unión de datos socieconómicos y de publicación de biodiversidad
 
 Data = pd.merge(BM_Data, df_merged, on=["year", "countryCode"], how="left")
 
 
+###############################
+
+
+# ANÁLISIS EXPLORATORIO - EDA
+
+
+###############################
+
+EDA_basic1 = Data.describe() 
+   
+EDA_basic = pd.concat([
+        Data.describe(include='all').T,
+        Data.isnull().sum().rename("Missing"),
+        Data.dtypes.rename("Type")
+    ], axis=1)
+
+
+EDA_basic.groupby('Type').count()
+
+
+# Crear el gráfico
+fig, ax = plt.subplots(figsize=(12, 6))
+msno.matrix(Data, 
+            ax=ax,
+            color=(0.25, 0.45, 0.85), 
+            sparkline=False,
+            fontsize=12)
+
+# Crear leyenda personalizada
+legend_elements = [
+    Patch(facecolor='white', edgecolor='black', label='Faltante'),
+    Patch(facecolor=(0.25, 0.45, 0.85), edgecolor='black', label='No faltante')
+]
+
+# Añadir leyenda fuera del gráfico
+ax.legend(
+    handles=legend_elements,
+    loc='center left',             # Ubicación relativa
+    bbox_to_anchor=(1.02, 0.5),    # Fuera a la derecha, centrada verticalmente
+    borderaxespad=0,
+    title='Valores',
+    fontsize=10,
+    title_fontsize=12
+)
+
+# Título del gráfico
+ax.set_title('Visualización de valores faltantes con leyenda externa', fontsize=16)
+
+# Ajustar layout para que no se corte la leyenda
+plt.tight_layout()
+plt.show()
 
 
 
