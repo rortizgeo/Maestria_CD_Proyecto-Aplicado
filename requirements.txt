@@ -1,0 +1,18 @@
+# Núcleo científico
+pandas
+numpy
+matplotlib
+seaborn
+tqdm
+
+# Preprocesamiento y modelado con Scikit-Learn
+scikit-learn
+
+# Modelos especializados
+xgboost
+statsmodels
+
+# Prophet (series temporales)
+prophet
+cmdstanpy
+
