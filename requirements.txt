@@ -1,18 +1,26 @@
-# Núcleo científico
-pandas
-numpy
-matplotlib
-seaborn
-tqdm
+# --- Procesamiento ---
+pandas>=1.3.0
+numpy>=1.26.0   # Ajustado a tu versión reciente para evitar conflictos de binarios
+openpyxl>=3.0.0
 
-# Preprocesamiento y modelado con Scikit-Learn
-scikit-learn
+# --- Visualización ---
+matplotlib>=3.4.0
+seaborn>=0.13.0
 
-# Modelos especializados
-xgboost
-statsmodels
+# --- ML & Modelos ---
+scikit-learn>=1.0.0
+xgboost==2.1.4  # Para el XGBoost se usa un Wrapper específico
+statsmodels>=0.14.0
+linearmodels>=4.24
+joblib>=1.1.0
 
-# Prophet (series temporales)
-prophet
-cmdstanpy
+# --- Deep Learning (Configuración Inteligente) ---
+# 1. El núcleo de TensorFlow (Para todos)
+tensorflow>=2.16.0
 
+# 2. Aceleración Gráfica (SOLO para Mac con chip M1/M2/M3)
+# Esta línea será ignorada automáticamente en Windows y Linux
+tensorflow-metal; sys_platform == 'darwin' and platform_machine == 'arm64'
+
+# --- Utilidades ---
+tqdm>=4.60.0
