@@ -4,7 +4,7 @@
 ````markdown
 # Proyecto de Análisis de Datos y Modelado Híbrido
 
-Este repositorio contiene el código fuente para el análisis econométrico y modelado predictivo de series temporales y datos de panel. El proyecto combina técnicas estadísticas clásicas con algoritmos avanzados de Machine Learning y Deep Learning.
+Este repositorio contiene el código fuente para el análisis econométrico y modelado predictivo de series temporales y datos de panel. El proyecto combina técnicas estadísticas clásicas con algoritmos de Machine Learning y Deep Learning.
 
 ## 📋 Características del Proyecto
 
@@ -15,6 +15,7 @@ El flujo de trabajo incluye:
     * **Random Forest:** Para capturar no-linealidades tabulares.
     * **XGBoost:** Optimizado con un *Wrapper* personalizado para estabilidad en diferentes arquitecturas.
     * **LSTM (Deep Learning):** Redes recurrentes para capturar dependencias secuenciales complejas.
+    * **Ridge:** Modelo de regularización aplicado a una propuesta de modelos híbrido.
 4.  **Validación Robusta:** Uso de `TimeSeriesSplit` para respetar la temporalidad de los datos durante el entrenamiento.
 
 ## ⚙️ Instalación y Configuración
